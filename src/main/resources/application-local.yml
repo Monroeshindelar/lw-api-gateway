@@ -13,6 +13,10 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: account-service
+          uri: http://localhost:6091/
+          predicates:
+            - Path=/login, /oauth2/authorization/discord, /users/**, /auth/**
         - id: game-service
           uri: http://localhost:7331/
           predicates:
