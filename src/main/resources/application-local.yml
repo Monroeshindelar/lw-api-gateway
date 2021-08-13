@@ -10,11 +10,11 @@ spring:
     gateway:
       routes:
         - id: account-service-open
-          uri: http://localhost:6091/
+          uri: ${ACCOUNT_SERVICE_HOST}:${ACCOUNT_SERVICE_PORT:6091}
           predicates:
             - Path=/login, /oauth2/authorization/discord
         - id: account-service-protected
-          uri: http://localhost:6091/
+          uri: ${ACCOUNT_SERVICE_HOST}:${ACCOUNT_SERVICE_PORT:6091}
           predicates:
             - Path=/users/**, /auth/**
           filters:
