@@ -1,4 +1,4 @@
-package com.tm.tenmanapigateway;
+package com.mshindelar.lwapigateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

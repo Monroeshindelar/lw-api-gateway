@@ -1,4 +1,4 @@
-package com.tm.tenmanapigateway.configuration;
+package com.mshindelar.lwapigateway.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
