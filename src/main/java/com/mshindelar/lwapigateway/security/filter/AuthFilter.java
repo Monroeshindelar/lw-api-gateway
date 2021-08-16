@@ -1,9 +1,11 @@
 package com.mshindelar.lwapigateway.security.filter;
 
+import com.mshindelar.lwapigateway.configuration.AuthFilterConfig;
 import com.mshindelar.lwapigateway.exception.MissingAuthCredentialsException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +16,9 @@ import reactor.core.publisher.Mono;
 @Component
 @Slf4j
 public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> {
+
+    @Autowired
+    private AuthFilterConfig authFilterConfig;
 
     private final WebClient.Builder webClientBuilder;
 
@@ -39,7 +44,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
 
             return webClientBuilder.build()
                     .get()
-                    .uri("http://localhost:6091/auth/token/validate?token=" + tokens[1])
+                    .uri(this.authFilterConfig.getUri() + "/auth/token/validate?token=" + tokens[1])
                     .retrieve().bodyToMono(String.class)
                     .map(id -> {
                         logger.info(id);

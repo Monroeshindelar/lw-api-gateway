@@ -10,18 +10,23 @@ spring:
     gateway:
       routes:
         - id: account-service-open
-          uri: ${ACCOUNT_SERVICE_HOST}:${ACCOUNT_SERVICE_PORT:6091}
+          uri: ${ACCOUNT_SERVICE_HOST:http://localhost}:${ACCOUNT_SERVICE_PORT:6091}
           predicates:
             - Path=/login, /oauth2/authorization/discord
         - id: account-service-protected
-          uri: ${ACCOUNT_SERVICE_HOST}:${ACCOUNT_SERVICE_PORT:6091}
+          uri: ${ACCOUNT_SERVICE_HOST:http://localhost}:${ACCOUNT_SERVICE_PORT:6091}
           predicates:
             - Path=/users/**, /auth/**
           filters:
             - AuthFilter
         - id: game-service
-          uri: ${GAME_SERVICE_HOST}:${GAME_SERVICE_PORT:7331}
+          uri: ${GAME_SERVICE_HOST:localhost}:${GAME_SERVICE_PORT:7331}
           predicates:
             - Path=/games/squadlocke/**
           filters:
             - AuthFilter
+
+application:
+  filter:
+    auth:
+      uri: ${AUTH_FILTER_URI:http://10.0.0.84:6091/}
