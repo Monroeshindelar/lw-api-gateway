@@ -3,4 +3,4 @@ LABEL authors="Monroe Shindelar (Monroeshindelar@gmail.com), Tanner Dryden (tdd7
 VOLUME /main-app
 ADD build/libs/*.jar service.jar
 EXPOSE 9292
-ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=docker-local", "/service.jar"]
+ENTRYPOINT ["java", "-jar", "/service.jar"]
