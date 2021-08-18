@@ -1,0 +1,7 @@
+lw-api-gateway:
+  image: monroeshindelar/lw-api-gateway
+  container_name: lw-api-gateway
+  ports:
+    - 9292:9292
+  env_file:
+    - env.list
