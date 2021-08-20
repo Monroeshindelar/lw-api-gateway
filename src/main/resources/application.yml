@@ -22,7 +22,7 @@ spring:
         - id: game-service
           uri: ${GAME_SERVICE_HOST}:${GAME_SERVICE_PORT:7331}
           predicates:
-            - Path=/games/squadlocke/**
+            - Path=/games/squadlocke/**, /generations/**
           filters:
             - AuthFilter
 
