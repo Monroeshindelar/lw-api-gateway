@@ -27,6 +27,8 @@ spring:
             - AuthFilter
 
 application:
+  gateway-settings:
+    allowedOrigin: "http://${CORS_ALLOWED_HOST}:${CORS_ALLOWED_PORT}"
   filter:
     auth:
       uri: ${AUTH_FILTER_URI}
