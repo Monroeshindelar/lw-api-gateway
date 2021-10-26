@@ -9,16 +9,16 @@ spring:
       enabled: true
     gateway:
       routes:
-        - id: account-service-open
-          uri: ${ACCOUNT_SERVICE_HOST}:${ACCOUNT_SERVICE_PORT:6091}
-          predicates:
-            - Path=/oauth2/authorization/discord, /login/oauth2/code/discord
         - id: account-service-protected
           uri: ${ACCOUNT_SERVICE_HOST}:${ACCOUNT_SERVICE_PORT:6091}
           predicates:
-            - Path=/users/**, /auth/**
+            - Path=/users/me, /auth/**
           filters:
             - AuthFilter
+        - id: account-service-open
+          uri: ${ACCOUNT_SERVICE_HOST}:${ACCOUNT_SERVICE_PORT:6091}
+          predicates:
+            - Path=/oauth2/authorization/discord, /login/oauth2/code/discord, /users/**
         - id: game-service
           uri: ${GAME_SERVICE_HOST}:${GAME_SERVICE_PORT:7331}
           predicates:
